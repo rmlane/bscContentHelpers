@@ -28,6 +28,8 @@ You can install the development version of bscContentHelpers from [Github](https
 install_github("rmlane/bscContenHelpers")
 ```
 
+The repository is currently private, so you will need an authorization key. 
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:

@@ -1,8 +1,12 @@
 Package: bscContentHelpers
+Title: Templates and Utility Functions for BSC Content
 Version: 0.0.0.9000
-Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
-Authors@R: person("Rachel", "Lane", email = "rlane7@uic.edu", role = c("aut", "cre")
+Authors@R: 
+    person(given = "Rachel",
+           family = "Lane",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: This package contains templates and utility functions for CCTS BSC content. Content should be written in (R) markdown and can be knitted to other formats as needed.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
