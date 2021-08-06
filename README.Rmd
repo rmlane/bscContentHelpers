@@ -6,11 +6,12 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%",
-  eval = FALSE
+  collapse   = TRUE,
+  comment    = "#>",
+  fig.path   = "man/figures/README-",
+  out.width  = "100%",
+  eval       = FALSE,
+  fig.path   = "man/figures/"
 )
 ```
 
@@ -29,7 +30,7 @@ You can install the development version of bscContentHelpers from [Github](https
 install_github("rmlane/bscContenHelpers")
 ```
 
-The repository is currently private, so you will need an authorization key. 
+The repository is currently private, so you will need an authorization key. The package must be installed to access the document templates and supporting files.
 
 ## Example
 
@@ -39,6 +40,47 @@ This is a basic example which shows you how to solve a common problem:
 library(bscContentHelpers)
 ## basic example code
 ```
+
+## Document Templates
+
+Each document template relies on three files:
+
+### A .Rmd Template
+Create a new blank document based on the template by calling `rmarkdown::draft("my_article.Rmd", template = "jss_article", package = "rticles")
+`. For example, to create a new tipsheet called "Working with COVID-19 Data", call:
+
+```{r}
+rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
+```
+
+Templates are also available through the `File > New File > R Markdown... > From Template` dialog box in R Studio.
+
+*TODO: insert image. Store in `man/figures/`.*
+
+Existing BSC templates inlcude:
+
+* Tipsheet. This could also be used for a short article.
+
+### An Output Format
+
+This controls the file type (e.g., docx, html) and the look and feel of the output document. It should be referenced in the YAML frontmatter of the Rmd document.
+
+Current custom formats:
+
+* `html_draft`. This should be used while developing content to avoid focusing too much on the final aesthetic details. 
+
+TODO: 
+
+* `tipsheet_pdf`
+
+
+
+
+### A Knit Function
+This controls the behavior of the knit function. It determines how the Rmd draft gets turned into the PDF output. Some settings are customizable (for example, should the final document include a table of contents?). Others are pre-configured.
+
+
+
 
 ## Google Drive Integration
 
@@ -58,4 +100,11 @@ BSC files are saved in a [BSC Content folder on Google Drive](https://drive.goog
 googledrive::drive_get(id = "16XepzMyzRAK4pcuET8goearkb0J5GwLP")
 ```
 
+## TODO
 
+- [ ] decide when, where, and how files should be uploaded to Drive
+- [ ] set target (dynamic) locations for outputs
+- [ ] write a `knit_template` function that will regenerate Rmd templates in Drive
+- [ ] workflows and functions to convert from one template to another
+- [ ] connect document titles to file names (and calls to `rmarkdown::draft()`)
+- [ ] where to set output doc parameters for use in knit fxn?
