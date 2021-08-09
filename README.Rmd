@@ -46,8 +46,11 @@ library(bscContentHelpers)
 Each document template relies on three files:
 
 ### A .Rmd Template
-Create a new blank document based on the template by calling `rmarkdown::draft("my_article.Rmd", template = "jss_article", package = "rticles")
-`. For example, to create a new tipsheet called "Working with COVID-19 Data", call:
+This controls the structure of a document. For example, it may include standard headers, sample code, or boilerplate text. 
+
+Create a new blank document based on a template by calling `rmarkdown::draft("my_article.Rmd", template = "template_name", package = "bscContentHelpers")`.
+
+For example, to create a new tipsheet, call:
 
 ```{r}
 rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
@@ -55,9 +58,9 @@ rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscCont
 
 Templates are also available through the `File > New File > R Markdown... > From Template` dialog box in R Studio.
 
-*TODO: insert image. Store in `man/figures/`.*
+![Create a new doc from a template.](man/figures/new_doc_from_template.png)
 
-Existing BSC templates inlcude:
+Existing BSC templates include:
 
 * Tipsheet. This could also be used for a short article.
 
