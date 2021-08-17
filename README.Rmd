@@ -30,7 +30,7 @@ You can install the development version of bscContentHelpers from [Github](https
 install_github("rmlane/bscContenHelpers")
 ```
 
-The repository is currently private, so you will need an authorization key. The package must be installed to access the document templates and supporting files.
+The repository is currently private, so you will need an authorization key. The package must be installed to access the document templates, functions, and supporting files.
 
 ## Example
 
@@ -43,12 +43,19 @@ library(bscContentHelpers)
 
 ## Document Templates
 
-Each document template relies on three files:
+Each document template relies on three files: [an .Rmd template](#rmd-template), [an output format](#output-format), and [a knit function](#knit-function).
 
 ### A .Rmd Template
-This controls the structure of a document. For example, it may include standard headers, sample code, or boilerplate text. 
 
-Create a new blank document based on a template by calling `rmarkdown::draft("my_article.Rmd", template = "template_name", package = "bscContentHelpers")`.
+At its most basic, an .Rmd template is a sample file, written in R Markdown, that may include standard headers, sample code, or boilerplate text. It will also contain default and placeholder settings in a header block. 
+
+
+
+
+
+In the context of an R package, an Rmd template also includes supporting documents and settings. This controls the structure of a document. For example, it 
+
+Create a new blank document based on a template by calling `rmarkdown::draft()`.
 
 For example, to create a new tipsheet, call:
 
@@ -56,7 +63,7 @@ For example, to create a new tipsheet, call:
 rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
 ```
 
-Templates are also available through the `File > New File > R Markdown... > From Template` dialog box in R Studio.
+If the package is installed, templates are also available through the `File > New File > R Markdown... > From Template` dialog box in R Studio.
 
 ![Create a new doc from a template.](man/figures/new_doc_from_template.png)
 
@@ -66,7 +73,7 @@ Existing BSC templates include:
 
 ### An Output Format
 
-This controls the file type (e.g., docx, html) and the look and feel of the output document. It should be referenced in the YAML frontmatter of the Rmd document.
+This is an R function that defines the file type (e.g., docx, html) and the look and feel of the output document. It should be referenced in the YAML frontmatter of the Rmd document.
 
 Current custom formats:
 
@@ -77,31 +84,45 @@ TODO:
 * `tipsheet_pdf`
 
 
+### A Knit Function {#knit-function}
 
+This controls the behavior of the knit button; in other words, it determines how the Rmd draft gets turned into the PDF output. Some settings are customizable (for example, should the final document include a table of contents?). Others are pre-set.
 
-### A Knit Function
-This controls the behavior of the knit function. It determines how the Rmd draft gets turned into the PDF output. Some settings are customizable (for example, should the final document include a table of contents?). Others are pre-configured.
-
-
+In general, you should not need to make any changes to the knit function, beyond possibly changing some parameters.
 
 
 ## Google Drive Integration
 
-Reading files from and writing files to Google Drive requires authorization. To ensure you have access, call:
+Templates and documents are stored in a [BSC Content folder on Google Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP). They can be accessed through R Studio via the [`googledrive` package](https://googledrive.tidyverse.org/). 
+
+Reading and writing files requires allowing the R package to access your Google Drive account. To ensure you have access, run:
 
 ```{r, eval = FALSE}
-googledrive::drive_find(n_max = 20)
+# if necessary, install the package
+install.packages("googledrive")
+
+# view files and folders in the BSC Content Google Drive folder
+googledrive::drive_ls(as_id(gd_id), recursive = FALSE)
 ```
 
 You should be sent to a login screen. Authorize Tidyverse API to access your Google account.
 
-[See the Tidyverse site for `googledrive` documentation.](https://googledrive.tidyverse.org/) 
+Files can be saved to and read from specific Google Drive locations. Every Google Drive folder has a unique id, equivalent to the id used in the URL in a web browser.
 
-BSC files are saved in a [BSC Content folder on Google Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP). View files:
+![Google Drive folder id](man/figures/gd_id.png)
+To look up the id of a subfolder (nested within BSC Content), use `find_gd_id()`
 
 ```{r}
-googledrive::drive_get(id = "16XepzMyzRAK4pcuET8goearkb0J5GwLP")
+find_gd_id("Templates")
 ```
+
+
+Any time an .Rmd template is updated in this package, generate a fresh copy and send it to the `BSC Content/Templates` folder. This will overwrite the existing copy on Google Drive.
+
+```{r}
+upload_template_to_drive("tipsheet")
+```
+
 
 ## TODO
 

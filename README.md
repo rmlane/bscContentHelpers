@@ -20,8 +20,8 @@ install_github("rmlane/bscContenHelpers")
 ```
 
 The repository is currently private, so you will need an authorization
-key. The package must be installed to access the document templates and
-supporting files.
+key. The package must be installed to access the document templates,
+functions, and supporting files.
 
 ## Example
 
@@ -34,12 +34,20 @@ library(bscContentHelpers)
 
 ## Document Templates
 
-Each document template relies on three files:
+Each document template relies on three files: [an .Rmd
+template](#rmd-template), [an output format](#output-format), and [a
+knit function](#knit-function).
 
 ### A .Rmd Template
 
-This controls the structure of a document. For example, it may include
-standard headers, sample code, or boilerplate text.
+At its most basic, an .Rmd template is a sample file, written in R
+Markdown, that may include standard headers, sample code, or boilerplate
+text. It will also contain default and placeholder settings in a header
+block.
+
+In the context of an R package, an Rmd template also includes supporting
+documents and settings. This controls the structure of a document. For
+example, it
 
 Create a new blank document based on a template by calling
 `rmarkdown::draft("my_article.Rmd", template = "template_name", package = "bscContentHelpers")`.
@@ -50,22 +58,22 @@ For example, to create a new tipsheet, call:
 rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
 ```
 
-Templates are also available through the
+If the package is installed, templates are also available through the
 `File > New File > R Markdown... > From Template` dialog box in R
 Studio.
 
 ![Create a new doc from a
 template.](man/figures/new_doc_from_template.png)
 
-Existing BSC templates inlcude:
+Existing BSC templates include:
 
 -   Tipsheet. This could also be used for a short article.
 
 ### An Output Format
 
-This controls the file type (e.g., docx, html) and the look and feel of
-the output document. It should be referenced in the YAML frontmatter of
-the Rmd document.
+This is an R function that defines the file type (e.g., docx, html) and
+the look and feel of the output document. It should be referenced in the
+YAML frontmatter of the Rmd document.
 
 Current custom formats:
 
@@ -78,18 +86,55 @@ TODO:
 
 ### A Knit Function
 
-This controls the behavior of the knit function. It determines how the
-Rmd draft gets turned into the PDF output. Some settings are
-customizable (for example, should the final document include a table of
-contents?). Others are pre-configured.
+This controls the behavior of the knit button; in other words, it
+determines how the Rmd draft gets turned into the PDF output. Some
+settings are customizable (for example, should the final document
+include a table of contents?). Others are pre-set.
+
+In general, you should not need to make any changes to the knit
+function, beyond possibly changing some parameters.
 
 ## Google Drive Integration
 
-Reading files from and writing files to Google Drive requires
-authorization. To ensure you have access, call:
+Templates and documents are stored on Google Drive and cann be accessed
+through R Studio via the [`googledrive`
+package](https://googledrive.tidyverse.org/). Install the package by
+calling
 
 ``` r
-googledrive::drive_find(n_max = 20)
+install.packages("googledrive")
+```
+
+Reading files from and writing files to Google Drive requires
+authorization. To ensure you have access, call in the console:
+
+``` r
+# library(googledrive)
+# library(tidyverse)
+
+# view files in google drive folder
+# gd_id <- Sys.getenv("gd_id")
+# googledrive::drive_ls(as_id(gd_id), recursive = TRUE)
+```
+
+``` r
+# get location of templates on google drive
+# gd_templates <- as_id(gd_id) %>% 
+#   drive_ls() %>% 
+#   filter(grepl("(?i)templates", name)) %>% 
+#   pull(id)
+```
+
+``` r
+# # create a temp file and create template 
+# temp <- tempfile(fileext = ".Rmd")
+# rmarkdown::draft(temp, template = "tipsheet", package = "bscContentHelpers", edit = TRUE)
+# 
+# # upload to Templates file on drive
+# drive_put(temp, path = gd_templates, name = "Tipsheet")
+# 
+# # verify
+# drive_ls(as_id(gd_id), recursive = TRUE, type="folder") 
 ```
 
 You should be sent to a login screen. Authorize Tidyverse API to access
@@ -103,7 +148,7 @@ Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP)
 View files:
 
 ``` r
-googledrive::drive_get(id = "16XepzMyzRAK4pcuET8goearkb0J5GwLP")
+googledrive::drive_ls(as_id(gd_id), recursive = TRUE)
 ```
 
 ## TODO
