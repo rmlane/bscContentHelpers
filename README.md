@@ -50,7 +50,7 @@ documents and settings. This controls the structure of a document. For
 example, it
 
 Create a new blank document based on a template by calling
-`rmarkdown::draft("my_article.Rmd", template = "template_name", package = "bscContentHelpers")`.
+`rmarkdown::draft()`.
 
 For example, to create a new tipsheet, call:
 
@@ -94,61 +94,110 @@ include a table of contents?). Others are pre-set.
 In general, you should not need to make any changes to the knit
 function, beyond possibly changing some parameters.
 
+## Create a New Template
+
+To start, generate a new Rmd template and supporting structures by
+calling `use_rmarkdown_template()`, part of the `usethis` package. A
+template should describe a type of document; for example, you might
+create a template for an article, for a tipsheet, or for a slide
+presentation.
+
+``` r
+use_rmarkdown_template("Slides")
+```
+
+Navigate to the newly created folder, located under
+`inst/rmarkdown/templates/slides`. The file `template.yaml` contains the
+template name and a few configurations. Edit the description, but
+otherwise this file can be left alone.
+
+To edit the .Rmd template file (which will be the basis of any documents
+based on this template), open `skeleton/skeleton.Rmd`. This is where you
+should put any sample text or headers that will be available each time a
+new document is created.
+
+The header block, surrounded by three ticks (`---`), includes parameters
+that will be used when rendering the document to its final form. Some,
+like title and date, are placeholders and may be edited every time a new
+document is created. Others, like the output format and knit function,
+can be standardized in this document so they will be the same every time
+a document of this type is created. For more about formats and knit
+functions, see below.
+
+## Create a New Format
+
+An Rmd template defines the content and structure of a document. Once
+the content has been developed, one or more formats can be applied.
+Formats define the type of file (e.g., .docx or .pptx) and the look and
+feel (e.g., colors, fonts, headers) of the final product.
+
+Note that multiple different formats can be applied to the same
+template. For example, you might have an .Rmd report that can be knit as
+an html draft during content development. The final version could be
+knit to a pdf with custom headers, fonts, and colors.
+
+``` r
+# create a new format; this is where you'll define output type and look & feel 
+use_r("uic_pptx")
+```
+
+In the format file, create a function that defines the format. In most
+cases, this function will specify options and call a base rmarkdown
+format.
+
+``` r
+uic_pptx <- function() {
+ 
+  # call the base powerpoint_presentation format
+  rmarkdown::powerpoint_presentation(
+    reference_doc = "my_reference.pptx"
+  )
+   
+}
+```
+
+Supporting files should be in `inst/rmd_files/`. See examples in `R/`
+(`html_draft()`) or the excellent [R Markdown
+documentation](https://bookdown.org/yihui/rmarkdown/) for more examples.
+
 ## Google Drive Integration
 
-Templates and documents are stored on Google Drive and cann be accessed
-through R Studio via the [`googledrive`
-package](https://googledrive.tidyverse.org/). Install the package by
-calling
+Templates and documents are stored in a [BSC Content folder on Google
+Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP).
+They can be accessed through R Studio via the [`googledrive`
+package](https://googledrive.tidyverse.org/).
+
+Reading and writing files requires allowing the R package to access your
+Google Drive account. To ensure you have access, run:
 
 ``` r
+# if necessary, install the package
 install.packages("googledrive")
-```
 
-Reading files from and writing files to Google Drive requires
-authorization. To ensure you have access, call in the console:
-
-``` r
-# library(googledrive)
-# library(tidyverse)
-
-# view files in google drive folder
-# gd_id <- Sys.getenv("gd_id")
-# googledrive::drive_ls(as_id(gd_id), recursive = TRUE)
-```
-
-``` r
-# get location of templates on google drive
-# gd_templates <- as_id(gd_id) %>% 
-#   drive_ls() %>% 
-#   filter(grepl("(?i)templates", name)) %>% 
-#   pull(id)
-```
-
-``` r
-# # create a temp file and create template 
-# temp <- tempfile(fileext = ".Rmd")
-# rmarkdown::draft(temp, template = "tipsheet", package = "bscContentHelpers", edit = TRUE)
-# 
-# # upload to Templates file on drive
-# drive_put(temp, path = gd_templates, name = "Tipsheet")
-# 
-# # verify
-# drive_ls(as_id(gd_id), recursive = TRUE, type="folder") 
+# view files and folders in the BSC Content Google Drive folder
+googledrive::drive_ls(as_id(gd_id), recursive = FALSE)
 ```
 
 You should be sent to a login screen. Authorize Tidyverse API to access
 your Google account.
 
-[See the Tidyverse site for `googledrive`
-documentation.](https://googledrive.tidyverse.org/)
+Files can be saved to and read from specific Google Drive locations.
+Every Google Drive folder has a unique id, equivalent to the id used in
+the URL in a web browser.
 
-BSC files are saved in a [BSC Content folder on Google
-Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP).
-View files:
+![Google Drive folder id](man/figures/gd_id.png) To look up the id of a
+subfolder (nested within BSC Content), use `find_gd_id()`
 
 ``` r
-googledrive::drive_ls(as_id(gd_id), recursive = TRUE)
+find_gd_id("Templates")
+```
+
+Any time an .Rmd template is updated in this package, generate a fresh
+copy and send it to the `BSC Content/Templates` folder. This will
+overwrite the existing copy on Google Drive.
+
+``` r
+upload_template_to_drive("tipsheet")
 ```
 
 ## TODO

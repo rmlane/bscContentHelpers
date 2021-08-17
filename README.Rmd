@@ -91,6 +91,46 @@ This controls the behavior of the knit button; in other words, it determines how
 In general, you should not need to make any changes to the knit function, beyond possibly changing some parameters.
 
 
+
+## Create a New Template
+
+To start, generate a new Rmd template and supporting structures by calling `use_rmarkdown_template()`, part of the `usethis` package. A template should describe a type of document; for example, you might create a template for an article, for a tipsheet, or for a slide presentation.
+
+```{r, eval = FALSE}
+use_rmarkdown_template("Slides")
+```
+
+Navigate to the newly created folder, located under `inst/rmarkdown/templates/slides`. The file `template.yaml` contains the template name and a few configurations. Edit the description, but otherwise this file can be left alone.
+
+To edit the .Rmd template file (which will be the basis of any documents based on this template), open `skeleton/skeleton.Rmd`. This is where you should put any sample text or headers that will be available each time a new document is created. 
+
+The header block, surrounded by three ticks (`---`), includes parameters that will be used when rendering the document to its final form. Some, like title and date, are placeholders and may be edited every time a new document is created. Others, like the output format and knit function, can be standardized in this document so they will be the same every time a document of this type is created. For more about formats and knit functions, see below.
+
+## Create a New Format
+
+An Rmd template defines the content and structure of a document. Once the content has been developed, one or more formats can be applied. Formats define the type of file (e.g., .docx or .pptx) and the look and feel (e.g., colors, fonts, headers) of the final product. 
+
+Note that multiple different formats can be applied to the same template. For example, you might have an .Rmd report that can be knit as an html draft during content development. The final version could be knit to a pdf with custom headers, fonts, and colors.
+
+```{r, eval = FALSE}
+# create a new format; this is where you'll define output type and look & feel 
+use_r("uic_pptx")
+```
+In the format file, create a function that defines the format. In most cases, this function will specify options and call a base rmarkdown format.
+
+```{r, eval = FALSE}
+uic_pptx <- function() {
+ 
+  # call the base powerpoint_presentation format
+  rmarkdown::powerpoint_presentation(
+    reference_doc = "my_reference.pptx"
+  )
+   
+}
+```
+
+Supporting files should be in `inst/rmd_files/`. See examples in `R/` (`html_draft()`) or the excellent [R Markdown documentation](https://bookdown.org/yihui/rmarkdown/) for more examples. 
+
 ## Google Drive Integration
 
 Templates and documents are stored in a [BSC Content folder on Google Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP). They can be accessed through R Studio via the [`googledrive` package](https://googledrive.tidyverse.org/). 
