@@ -73,26 +73,53 @@ Existing BSC templates include:
 
 This is an R function that defines the file type (e.g., docx, html) and
 the look and feel of the output document. It should be referenced in the
-YAML frontmatter of the Rmd document.
+YAML frontmatter of the Rmd document. One Rmd file can be knit to
+multiple output formats simultaneously. To allow for this, include all
+outputs under `output:` in the YAML header.
 
-Current custom formats:
+Each format has default settings, some of which can be customized at the
+document level.
 
--   `html_draft`. This should be used while developing content to avoid
-    focusing too much on the final aesthetic details.
+`html_draft`. This can be used while developing content to avoid
+focusing too much on the final aesthetic details. Customizations: \*
+`toc: TRUE`. Include a table of contents at the start of the document?
+\* `css: NULL`. Path to the CSS stylesheet to use. Defaults to a plain,
+clean style.
+
+`uic_pptx`. This creates a PPTX.
 
 TODO:
 
--   `tipsheet_pdf`
+-   word\_document
+-   pdf\_document
+-   ppt\_presentation
+-   html\_webpage
 
 ### A Knit Function
 
 This controls the behavior of the knit button; in other words, it
-determines how the Rmd draft gets turned into the PDF output. Some
-settings are customizable (for example, should the final document
-include a table of contents?). Others are pre-set.
+determines how the Rmd draft gets turned into the PDF (html, docx, etc.)
+output.
 
-In general, you should not need to make any changes to the knit
-function, beyond possibly changing some parameters.
+Currently, all custom templates use the same knit function
+(`bsc_knit()`). It must be explicitly mentioned in the YAML metadata of
+an Rmd file (and is included in all templates).
+
+All arguments passed to the knit function have defaults, but some can be
+updated by explicitly setting parameters in the YAML header. These
+include:
+
+-   `output_file: NULL`. This sets the output document name (minus the
+    file extension). This will be the same for all output formats. If
+    not explicitly set, it will default to the document title, minus
+    spaces and special characters.
+-   `output_dir: NULL`. This sets the location where output documents
+    are produced. Defaults to the same directory as the Rmd source. If
+    stating explicitly, use a reference relative to the knit location.
+-   `dated_file: FALSE`. Append the date to the end of the file name?
+-   `file_date: Sys.Date()`. Date to be appended to the end of the file
+    name, if applciable. Defaults to today’s date but can be explicitly
+    overridden. To avoid errors, pass as a date object.
 
 ## Create a New Template
 
@@ -209,4 +236,4 @@ upload_template_to_drive("tipsheet")
 -   [ ] workflows and functions to convert from one template to another
 -   [ ] connect document titles to file names (and calls to
     `rmarkdown::draft()`)
--   [ ] where to set output doc parameters for use in knit fxn?
+-   [x] where to set output doc parameters for use in knit fxn?
