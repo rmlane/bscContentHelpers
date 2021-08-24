@@ -3,6 +3,7 @@ title: "Template Title"
 author: "Your Name"
 date: "The Date"
 output: bscContentHelpers::uic_pptx
+knit: bscContentHelpers::bsc_knit
 ---
 
 ```{r setup, include=FALSE}

@@ -6,7 +6,7 @@ output:
   bscContentHelpers::html_draft: default
   # clientHelpers::word_report: 
   #   toc: FALSE
-knit: bscContentHelpers::knit_tipsheet
+knit: bscContentHelpers::bsc_knit
 ---
 
 ```{r setup, include=FALSE}

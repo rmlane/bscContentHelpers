@@ -4,10 +4,12 @@
 \alias{html_draft}
 \title{Knit a Document to an HTML Draft}
 \usage{
-html_draft(toc = TRUE)
+html_draft(toc = TRUE, css = NULL)
 }
 \arguments{
 \item{toc}{Include a table of contents (2 levels deep)?}
+
+\item{css}{Path to css stylesheet}
 }
 \description{
 Knit a Document to an HTML Draft
