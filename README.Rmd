@@ -57,10 +57,10 @@ In the context of an R package, an Rmd template also includes supporting documen
 
 Create a new blank document based on a template by calling `rmarkdown::draft()`.
 
-For example, to create a new tipsheet, call:
+For example, to create a new tipsheet about COVID-19 data, call:
 
 ```{r}
-rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
+rmarkdown::draft("covid_tipsheet.Rmd", template = "article", package = "bscContentHelpers")
 ```
 
 If the package is installed, templates are also available through the `File > New File > R Markdown... > From Template` dialog box in R Studio.
@@ -69,7 +69,7 @@ If the package is installed, templates are also available through the `File > Ne
 
 Existing BSC templates include:
 
-* Tipsheet. This could also be used for a short article.
+* Article. This could be used for a tipsheet or other short article.
 * Slides
 
 Each template also includes a `references.bib` file, where references can be included in bibtex format. Refer to sources in the format `[@source]`.
@@ -90,8 +90,8 @@ TODO:
 
 * word_document
 * pdf_document
-* ppt_presentation
-* html_webpage
+* html_webpage (or md_webpage) -- for static site
+  - [ ] consider whether this needs a separate knit function
 
 ### A Knit Function {#knit-function}
 
@@ -110,7 +110,7 @@ All arguments passed to the knit function have defaults, but some can be updated
 
 ## Create a New Template
 
-To start, generate a new Rmd template and supporting structures by calling `use_rmarkdown_template()`, part of the `usethis` package. A template should describe a type of document; for example, you might create a template for an article, for a tipsheet, or for a slide presentation.
+To start, generate a new Rmd template and supporting structures by calling `use_rmarkdown_template()`, part of the `usethis` package. A template should describe a type of document; for example, you might create a template for an article or for a slide presentation.
 
 ```{r, eval = FALSE}
 use_rmarkdown_template("Slides")
@@ -130,7 +130,7 @@ Note that multiple different formats can be applied to the same template. For ex
 
 ```{r, eval = FALSE}
 # create a new format; this is where you'll define output type and look & feel 
-use_r("uic_pptx")
+use_r("pptx_presentation")
 ```
 In the format file, create a function that defines the format. In most cases, this function will specify options and call a base rmarkdown format.
 
@@ -176,7 +176,7 @@ find_gd_id("Templates")
 Any time an .Rmd template is updated in this package, generate a fresh copy and send it to the `BSC Content/Templates` folder. This will overwrite the existing copy on Google Drive.
 
 ```{r}
-upload_template_to_drive("tipsheet")
+upload_template_to_drive("article")
 ```
 
 

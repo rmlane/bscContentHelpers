@@ -52,10 +52,10 @@ example, it
 Create a new blank document based on a template by calling
 `rmarkdown::draft()`.
 
-For example, to create a new tipsheet, call:
+For example, to create a new tipsheet about COVID-19 data, call:
 
 ``` r
-rmarkdown::draft("covid_tipsheet.Rmd", template = "tipsheet", package = "bscContentHelpers")
+rmarkdown::draft("covid_tipsheet.Rmd", template = "article", package = "bscContentHelpers")
 ```
 
 If the package is installed, templates are also available through the
@@ -67,7 +67,12 @@ template.](man/figures/new_doc_from_template.png)
 
 Existing BSC templates include:
 
--   Tipsheet. This could also be used for a short article.
+-   Article. This could be used for a tipsheet or other short article.
+-   Slides
+
+Each template also includes a `references.bib` file, where references
+can be included in bibtex format. Refer to sources in the format
+`[@source]`.
 
 ### An Output Format
 
@@ -86,14 +91,14 @@ focusing too much on the final aesthetic details. Customizations: \*
 \* `css: NULL`. Path to the CSS stylesheet to use. Defaults to a plain,
 clean style.
 
-`uic_pptx`. This creates a PPTX.
+`pptx_presentation`. This creates a PPTX.
 
 TODO:
 
 -   word\_document
 -   pdf\_document
--   ppt\_presentation
--   html\_webpage
+-   html\_webpage (or md\_webpage) – for static site
+    -   [ ] consider whether this needs a separate knit function
 
 ### A Knit Function
 
@@ -126,8 +131,7 @@ include:
 To start, generate a new Rmd template and supporting structures by
 calling `use_rmarkdown_template()`, part of the `usethis` package. A
 template should describe a type of document; for example, you might
-create a template for an article, for a tipsheet, or for a slide
-presentation.
+create a template for an article or for a slide presentation.
 
 ``` r
 use_rmarkdown_template("Slides")
@@ -165,7 +169,7 @@ knit to a pdf with custom headers, fonts, and colors.
 
 ``` r
 # create a new format; this is where you'll define output type and look & feel 
-use_r("uic_pptx")
+use_r("pptx_presentation")
 ```
 
 In the format file, create a function that defines the format. In most
@@ -224,7 +228,7 @@ copy and send it to the `BSC Content/Templates` folder. This will
 overwrite the existing copy on Google Drive.
 
 ``` r
-upload_template_to_drive("tipsheet")
+upload_template_to_drive("article")
 ```
 
 ## TODO

@@ -21,5 +21,5 @@ upload_template_to_drive(
 Create a New File from a Template and Upload it to Drive
 }
 \examples{
-\dontrun{upload_template_to_drive("tipsheet")}
+\dontrun{upload_template_to_drive("article")}
 }

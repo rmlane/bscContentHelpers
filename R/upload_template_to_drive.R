@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{upload_template_to_drive("tipsheet")}
+#' \dontrun{upload_template_to_drive("article")}
 upload_template_to_drive <- function(
 	template,
 	upload_name    = NULL,
