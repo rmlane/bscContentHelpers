@@ -1,7 +1,8 @@
 ---
-title: "Tipsheet"
+title: "Article Title"
 author: "CCTS Biostatistics Core"
-date:  "`r format(Sys.Date(), '%B %d, %Y')`" # replace this with a set date if needed
+date:  "`r format(Sys.Date(), '%B %d, %Y')`"
+bibliography: references.bib
 output: 
   bscContentHelpers::html_draft: default
   # clientHelpers::word_report: 
@@ -10,13 +11,111 @@ knit: bscContentHelpers::bsc_knit
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 ```
 
-## Adding an RMarkdown Template
+# Overview
 
-This file is what a user will see when they select your template. Make sure that you update the fields in the yaml header. In particular you will want to update the `output` field to whatever format your template requires.
+This is a template. Update it with your custom content. Change output settings in the YAML header at the top of this file (between the two sets of `---` marks). Then render it to a formatted document by doing one of the following: 
 
-This is a good place to demonstrate special features that your template provides. Ideally it should knit out-of-the-box, or at least contain clear instructions as to what needs changing.
+* In R Studio, press the `Knit` button or use the `Shift + Ctrl + K` shortcut.
+* In the R console, run `rmarkdown::render('input.Rmd')` with any rendering options. Note that this method won't pick up some of the configuration options defined in this format, so you'll need to declare them on explicitly. Read more about `rmarkdown::render()` [here](https://rmarkdown.rstudio.com/docs/reference/render.html).
 
-Finally, be sure to remove this message!
+# Markdown Options
+
+This document is written in [markdown](https://www.markdownguide.org/), with some extra functionality through the [rmarkdown](https://bookdown.org/yihui/rmarkdown/) [@rmarkdown] and [bookdown](https://bookdown.org/yihui/bookdown/) [@bookdown] packages.
+
+Some common markdown syntax is demonstrated below. More information is available from [RStudio](https://rmarkdown.rstudio.com/authoring_basics.html), among many other places.
+
+## Text Formatting
+Text can easily be made *italic* or **bold** or ~~strikethrough~~ or ~subscript~ or ^superscript^.
+
+## Lists
+You can make unordered lists:
+
+* First item
+* Second item
+
+You can also make ordered lists:
+
+1. Something
+2. Another thing
+2. Note that the numbers don't need to be correct. R Markdown will take care of numbering the list during rendering.
+
+## Equations
+
+Equations can be easily inserted with standard LaTeX syntax. Inline: $y_i = \beta_0 + \beta_1x_i + \varepsilon_i$
+
+Standalone:
+
+$$y_i = \beta_0 + \beta_1x_i + \varepsilon_i$$
+
+## Code Chunks
+
+Embed R code and results via code chunks. You can decide whether to print the code, the results, and any messages or warnings.
+
+```{r mean-speed, eval = TRUE, echo = TRUE}
+mean_speed <- mean(cars$speed)
+mean_speed
+```
+
+Objects in the current environment are accessible via inline code. For example, the mean speed of the `cars` dataset is `r mean_speed`.
+
+If you want to print the code verbatim without running it, you can do that by adjusting the chunk options:
+
+```{r mean-speed-noeval, eval = FALSE, echo = TRUE}
+mean_speed <- mean(cars$speed)
+mean_speed
+```
+
+## Figures and Tables
+
+Print a formatted table with `knitr::kable()` and refer to it as Table \@ref(tab:cars-table):
+
+```{r cars-table}
+knitr::kable(
+  head(cars),
+  caption = "A table with some car data." #,longtable = TRUE
+  )
+```
+
+Tip: to allow tables to break across PDF pages, pass `kable(..., longtable = TRUE)`.
+
+Generate a plot and refer to it as Figure \@ref(fig:cars-figure):
+
+```{r cars-figure, fig.cap = "A plot of some car data."}
+plot(cars)
+```
+
+You can also include an image from an external file, as with Figure \@ref(fig:cat-figure):
+
+```{r cat-figure, fig.cap = "An image of a cat."}
+knitr::include_graphics("images/cat.jpg")
+```
+
+## Definitions
+
+Definition 1
+: "Definitions" are specially formatted key-value pairings. 
+
+Definition 2
+: These are good for consistently formatting glossaries. 
+
+## Links, Citations, and Footnotes
+
+Citations are stored as [BibTeX](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) entries in [references.bib](references.bib). They can be referenced inline by BibTeX id [@rmarkdown].
+
+Insert a footnote anywhere.[^my-note]
+
+[^my-note]: Citations and footnotes will be formatted automatically when you render the document.
+
+## More Headings 
+
+### Level 3 
+
+#### Level 4 
+
+##### Level 5 
+
+# References
+

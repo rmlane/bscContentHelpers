@@ -1,8 +1,9 @@
 ---
-title: "Template Title"
+title: "Presentation Title"
 author: "Your Name"
-date: "The Date"
-output: bscContentHelpers::uic_pptx
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+bibliography: references.bib
+output: bscContentHelpers::pptx_presentation
 knit: bscContentHelpers::bsc_knit
 ---
 
@@ -10,32 +11,75 @@ knit: bscContentHelpers::bsc_knit
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# In the morning
-
-## Getting up
-
-- Turn off alarm
-- Get out of bed
-
-## Breakfast
-
-- Eat eggs
-- Drink coffee
-
-# In the evening
-
-## Dinner
-
-- Eat spaghetti
-- Drink wine
-
----
-
-```{r, cars, fig.cap="A scatterplot.", echo=FALSE}
-plot(cars)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 ```
 
-## Going to sleep
+# Overview
 
-- Get in bed
-- Count sheep
+## Update This Template
+
+- Add custom content, using [rmarkdown](https://bookdown.org/yihui/rmarkdown/) syntax [@rmarkdown]
+- Change settings in the YAML header at the top of this file
+
+## Render The Document
+
+- Press the `Knit` button or use the `Shift + Ctrl + K` shortcut
+- Learn more about [`rmarkdown::render()`](https://rmarkdown.rstudio.com/docs/reference/render.html).
+
+# Markdown Options
+
+## Text Formatting
+
+- *italic* 
+- *bold** 
+- ~~strikethrough~~ 
+- ~subscript~ 
+- ^superscript^
+
+## Unordered Lists
+
+* First item
+* Second item
+
+## Ordered Lists
+
+1. One thing
+2. Another thing
+
+## Equations
+
+Inline LaTeX: $y_i = \beta_0 + \beta_1x_i + \varepsilon_i$
+
+<!-- manual slide break -->
+***
+
+Standalone LaTeX:
+
+$$y_i = \beta_0 + \beta_1x_i + \varepsilon_i$$
+
+## R Code
+
+Embed R code: 
+
+```{r mean-speed, eval = TRUE, echo = TRUE}
+mean_speed <- mean(cars$speed)
+mean_speed
+```
+
+***
+
+Access R objects: The mean speed of the `cars` dataset is `r mean_speed`.
+
+## Citations
+
+- Store citations as [BibTeX](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) entries in [references.bib](references.bib)
+- Reference them by BibTeX id [@rmarkdown]
+
+## Footnotes
+
+Insert a footnote anywhere.[^my-note]
+
+[^my-note]: Citations and footnotes will be formatted automatically when you render the document.
+
+# References
