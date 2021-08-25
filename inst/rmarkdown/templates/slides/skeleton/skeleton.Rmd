@@ -1,15 +1,11 @@
 ---
 title: "Presentation Title"
-author: "Your Name"
+author: "CCTS Biostatistics Core"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 bibliography: references.bib
 output: bscContentHelpers::pptx_presentation
 knit: bscContentHelpers::bsc_knit
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')

@@ -20,5 +20,5 @@ The location of the temp file.
 Create a Temp Draft from a R Markdown Template
 }
 \examples{
-create_temp_draft("tipsheet")
+create_temp_draft("article")
 }

@@ -7,7 +7,7 @@
 #' @return The location of the temp file.
 #' @export
 #'
-#' @examples create_temp_draft("tipsheet")
+#' @examples create_temp_draft("article")
 create_temp_draft <- function(template, package = "bscContentHelpers", edit = FALSE) {
 	# create a temp file location
 	temp_temp <- tempfile(fileext = ".Rmd")
