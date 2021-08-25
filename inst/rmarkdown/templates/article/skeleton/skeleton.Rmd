@@ -16,12 +16,32 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 
 # Overview
 
-This is a template. Update it with your custom content. Change output settings in the YAML header at the top of this file (between the two sets of `---` marks). Then render it to a formatted document by doing one of the following: 
+# Overview
 
-* In R Studio, press the `Knit` button or use the `Shift + Ctrl + K` shortcut.
-* In the R console, run `rmarkdown::render('input.Rmd')` with any rendering options. Note that this method won't pick up some of the configuration options defined in this format, so you'll need to declare them on explicitly. Read more about `rmarkdown::render()` [here](https://rmarkdown.rstudio.com/docs/reference/render.html).
+Update this template with your custom content. Change document properties in the YAML header (between the two sets of `---` marks at the top of this document). 
 
-# Markdown Options
+Render the formatted output document in R Studio by pressing the `Knit` button in or using the `Shift + Ctrl + K` shortcut.
+
+# YAML Header Options
+
+## Output Formats
+
+Review the package documentation for more about configuring the output. In brief, you should choose one or more output format: 
+
+* `bscContentHelpers::html_draft`
+* `bscContentHelpers::word_document`
+* `bscContentHelpers::pdf_document`
+* `bscContentHelpers::pptx_document`
+
+This template is oriented toward html, Word, or PDF output, but you can choose anything you want. Include multiple formats to knit them all at once. Delete or comment out the ones you don't need.
+
+Some output formats allow additional configurations (table of contents, color scheme or logo, etc). See the README for more.
+
+## Other Document Options
+
+You can set some additional properties in the header, such as output file name and location. If you don't customize these, defaults will be used. See the README for more.
+
+# Markdown
 
 This document is written in [markdown](https://www.markdownguide.org/), with some extra functionality through the [rmarkdown](https://bookdown.org/yihui/rmarkdown/) [@rmarkdown] and [bookdown](https://bookdown.org/yihui/bookdown/) [@bookdown] packages.
 
@@ -87,35 +107,21 @@ Generate a plot and refer to it as Figure \@ref(fig:cars-figure):
 plot(cars)
 ```
 
-You can also include an image from an external file, as with Figure \@ref(fig:cat-figure):
+You can also include an image from an external file or online location, as in Figure \@ref(fig:external-figure):
 
-```{r cat-figure, fig.cap = "An image of a cat."}
-knitr::include_graphics("images/cat.jpg")
+```{r external-figure, fig.cap = "An external image.", out.width="25%"}
+knitr::include_graphics("https://ipce.uic.edu/wp-content/uploads/sites/41/2018/10/CAMP.CIRC_.LG_.BLK_.png")
 ```
 
-## Definitions
-
-Definition 1
-: "Definitions" are specially formatted key-value pairings. 
-
-Definition 2
-: These are good for consistently formatting glossaries. 
-
-## Links, Citations, and Footnotes
+## Citations
 
 Citations are stored as [BibTeX](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) entries in [references.bib](references.bib). They can be referenced inline by BibTeX id [@rmarkdown].
+
+## Footnotes
 
 Insert a footnote anywhere.[^my-note]
 
 [^my-note]: Citations and footnotes will be formatted automatically when you render the document.
-
-## More Headings 
-
-### Level 3 
-
-#### Level 4 
-
-##### Level 5 
 
 # References
 

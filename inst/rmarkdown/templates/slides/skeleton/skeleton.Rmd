@@ -18,6 +18,8 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 - Add custom content, using [rmarkdown](https://bookdown.org/yihui/rmarkdown/) syntax [@rmarkdown]
 - Change settings in the YAML header at the top of this file
 
+***
+
 ## Render The Document
 
 - Press the `Knit` button or use the `Shift + Ctrl + K` shortcut
@@ -33,15 +35,21 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 - ~subscript~ 
 - ^superscript^
 
+***
+
 ## Unordered Lists
 
 * First item
 * Second item
 
+***
+
 ## Ordered Lists
 
 1. One thing
 2. Another thing
+
+***
 
 ## Equations
 
@@ -53,6 +61,8 @@ Inline LaTeX: $y_i = \beta_0 + \beta_1x_i + \varepsilon_i$
 Standalone LaTeX:
 
 $$y_i = \beta_0 + \beta_1x_i + \varepsilon_i$$
+
+***
 
 ## R Code
 
@@ -67,10 +77,14 @@ mean_speed
 
 Access R objects: The mean speed of the `cars` dataset is `r mean_speed`.
 
+***
+
 ## Citations
 
 - Store citations as [BibTeX](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) entries in [references.bib](references.bib)
 - Reference them by BibTeX id [@rmarkdown]
+
+***
 
 ## Footnotes
 
