@@ -1,7 +1,7 @@
-#' Word Report R Markdown Template
+#' Powerpoint R Markdown Template
 #'
 #' @export
-uic_pptx <- function() {
+pptx_presentation <- function() {
 
 	# choose style template
 	ref_ppt = pkg_resource("rmd_files/uic_ref.pptx")

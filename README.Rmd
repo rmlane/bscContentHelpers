@@ -70,6 +70,9 @@ If the package is installed, templates are also available through the `File > Ne
 Existing BSC templates include:
 
 * Tipsheet. This could also be used for a short article.
+* Slides
+
+Each template also includes a `references.bib` file, where references can be included in bibtex format. Refer to sources in the format `[@source]`.
 
 ### An Output Format
 
@@ -81,7 +84,7 @@ Each format has default settings, some of which can be customized at the documen
   * `toc: TRUE`. Include a table of contents at the start of the document?
   * `css: NULL`. Path to the CSS stylesheet to use. Defaults to a plain, clean style.
 
-`uic_pptx`. This creates a PPTX.
+`pptx_presentation`. This creates a PPTX.
 
 TODO: 
 
