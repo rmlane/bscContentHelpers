@@ -1,15 +1,13 @@
-#' Knit a Document to an HTML Draft
+#' HTML document output format, with optional themes
 #'
 #' @param toc Include a table of contents (2 levels deep)?
-#' @param css Path to css stylesheet
+#' @param theme Name of theme used in styling the output
 #'
 #' @export
-html_draft <- function(toc = TRUE, css = NULL) {
+html_draft <- function(toc = TRUE, theme = "plain") {
 
 	# fetch the css styles
-	if (is.null(css)) {
-		css    = bscContentHelpers::pkg_resource("rmd_files/custom.css")
-	}
+	css = bscContentHelpers::find_theme_doc(theme, "css")
 
 	# call the base bookdown::html_document2 function
 	bookdown::html_document2(

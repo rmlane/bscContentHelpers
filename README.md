@@ -6,11 +6,16 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of bscContentHelpers is to provide templates and utilities for
-creating, editing, and storing documents for the UIC CCTS Biostatistics
+`bscContentHelpers` provides templates and utilities for creating,
+editing, rendering, and storing documents for the UIC CCTS Biostatistics
 Core.
 
-## Installation
+## Quick Start
+
+### Install the Package and Dependencies
+
+The primary workflow described here relies on [R Studio](). Workarounds
+are possible but probably not worth the hassle.
 
 You can install the development version of bscContentHelpers from
 [Github](https://github.com/) with:
@@ -23,20 +28,57 @@ The repository is currently private, so you will need an authorization
 key. The package must be installed to access the document templates,
 functions, and supporting files.
 
-## Example
+The current package relies on several underlying packages and software
+products (pandoc, `rmarkdown`, `bookdown`). These should be
+automatically installed when you install `bscContentHelpers`.
 
-This is a basic example which shows you how to solve a common problem:
+### Create a Draft
+
+In R Studio, create a new draft document.
+
+To use the R Studio `New File` add-in, navigate to
+`File > New File > R Markdown... > From Template`. Select one of the
+templates from the `bscContentHelpers` package. Current options for
+types of documents include “article” and “slides”.
+
+![Create a new doc from a
+template.](man/figures/new_doc_from_template.png)
+
+You can also create a new blank document based on a template by manually
+calling `rmarkdown::draft()`:
 
 ``` r
-library(bscContentHelpers)
-## basic example code
+rmarkdown::draft("covid_tipsheet.Rmd", template = "article", package = "bscContentHelpers")
 ```
 
-## Document Templates
+### Edit
 
-Each document template relies on three files: [an .Rmd
-template](#rmd-template), [an output format](#output-format), and [a
-knit function](#knit-function).
+Do a little editing, making use of [(R) Markdown syntax]() and [R code
+chunks]().
+
+You should change the document title. You can also edit other fields in
+the YAML header or leave them as is. It’s a good idea to leabe the
+output format as `bscContentHelpers::html_document` during content
+development, but you can also change this value to a [different output
+format]() if you wish.
+
+### Knit
+
+Convert the .Rmd draft to a polished, formatted document in one of two
+ways:
+
+-   Click the `knit` button in R Studio
+-   Use the `Ctrl + Shift + K` keyboard shortcut.
+
+These actions tell R Studio to knit the document, calling
+`rmarkdown::render()` with any arguments defined in the document
+templates.
+
+## Under the Hood
+
+The document development and rendering process relies on three files:
+[an .Rmd template](#rmd-template), [an output format](#output-format),
+and [a knit function](#knit-function).
 
 ### A .Rmd Template
 
@@ -48,22 +90,6 @@ block.
 In the context of an R package, an Rmd template also includes supporting
 documents and settings. This controls the structure of a document. For
 example, it
-
-Create a new blank document based on a template by calling
-`rmarkdown::draft()`.
-
-For example, to create a new tipsheet about COVID-19 data, call:
-
-``` r
-rmarkdown::draft("covid_tipsheet.Rmd", template = "article", package = "bscContentHelpers")
-```
-
-If the package is installed, templates are also available through the
-`File > New File > R Markdown... > From Template` dialog box in R
-Studio.
-
-![Create a new doc from a
-template.](man/figures/new_doc_from_template.png)
 
 Existing BSC templates include:
 
@@ -86,16 +112,16 @@ Each format has default settings, some of which can be customized at the
 document level.
 
 `html_draft`. This can be used while developing content to avoid
-focusing too much on the final aesthetic details. Customizations: \*
-`toc: TRUE`. Include a table of contents at the start of the document?
-\* `css: NULL`. Path to the CSS stylesheet to use. Defaults to a plain,
-clean style.
+focusing too much on the final aesthetic details. Customization: \*
+`toc`. Include a table of contents at the start of the document? \*
+`theme`. Name of the CSS style to use. Defaults to a plain, clean style.
 
-`pptx_presentation`. This creates a PPTX.
+`pptx_presentation`
+
+`word_document`
 
 TODO:
 
--   word\_document
 -   pdf\_document
 -   html\_webpage (or md\_webpage) – for static site
     -   [ ] consider whether this needs a separate knit function
@@ -191,6 +217,10 @@ Supporting files should be in `inst/rmd_files/`. See examples in `R/`
 (`html_draft()`) or the excellent [R Markdown
 documentation](https://bookdown.org/yihui/rmarkdown/) for more examples.
 
+## Create a New Knit Function
+
+You probably don’t need to do this.
+
 ## Google Drive Integration
 
 Templates and documents are stored in a [BSC Content folder on Google
@@ -231,7 +261,7 @@ overwrite the existing copy on Google Drive.
 upload_template_to_drive("article")
 ```
 
-## TODO
+### TODO
 
 -   [ ] decide when, where, and how files should be uploaded to Drive
 -   [ ] set target (dynamic) locations for outputs

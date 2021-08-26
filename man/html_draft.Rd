@@ -2,15 +2,15 @@
 % Please edit documentation in R/html_draft.R
 \name{html_draft}
 \alias{html_draft}
-\title{Knit a Document to an HTML Draft}
+\title{HTML document output format, with optional themes}
 \usage{
-html_draft(toc = TRUE, css = NULL)
+html_draft(toc = TRUE, theme = "plain")
 }
 \arguments{
 \item{toc}{Include a table of contents (2 levels deep)?}
 
-\item{css}{Path to css stylesheet}
+\item{theme}{Name of theme used in styling the output}
 }
 \description{
-Knit a Document to an HTML Draft
+HTML document output format, with optional themes
 }

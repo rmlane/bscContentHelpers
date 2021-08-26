@@ -2,10 +2,13 @@
 % Please edit documentation in R/pptx_presentation.R
 \name{pptx_presentation}
 \alias{pptx_presentation}
-\title{Powerpoint R Markdown Template}
+\title{Powerpoint (pptx) document output format, with optional themes}
 \usage{
-pptx_presentation()
+pptx_presentation(theme = "red")
+}
+\arguments{
+\item{theme}{Name of theme to use when styling output presentation}
 }
 \description{
-Powerpoint R Markdown Template
+Powerpoint (pptx) document output format, with optional themes
 }

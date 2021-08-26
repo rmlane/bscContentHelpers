@@ -1,13 +1,15 @@
-#' Powerpoint R Markdown Template
+#' Powerpoint (pptx) document output format, with optional themes
+#'
+#' @param theme Name of theme to use when styling output presentation
 #'
 #' @export
-pptx_presentation <- function() {
+pptx_presentation <- function(theme = "red") {
 
 	# choose style template
-	ref_ppt = pkg_resource("rmd_files/uic_ref.pptx")
+	refdoc = bscContentHelpers::find_theme_doc(theme, "pptx")
 
 	# call the base powerpoint_presentation function
 	rmarkdown::powerpoint_presentation(
-		reference_doc = ref_ppt
+		reference_doc = refdoc
 	)
 }
