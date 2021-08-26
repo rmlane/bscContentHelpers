@@ -5,8 +5,8 @@ date:  "`r format(Sys.Date(), '%B %d, %Y')`"
 bibliography: references.bib
 output: 
   bscContentHelpers::html_draft: default
-  # clientHelpers::word_report: 
-  #   toc: FALSE
+  # bscContentHelpers::word_document:
+    # toc: FALSE
 knit: bscContentHelpers::bsc_knit
 ---
 
@@ -16,11 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE, out.width = '75%')
 
 # Overview
 
-# Overview
-
-Update this template with your custom content. Change document properties in the YAML header (between the two sets of `---` marks at the top of this document). 
-
-Render the formatted output document in R Studio by pressing the `Knit` button in or using the `Shift + Ctrl + K` shortcut.
+Update this template with your custom content. Then create  formatted output document by pressing the `Knit` button in or using the `Shift + Ctrl + K` shortcut in R Studio.
 
 # YAML Header Options
 

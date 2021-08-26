@@ -4,7 +4,7 @@
 \alias{word_document}
 \title{Word (docx) document output format, with optional themes}
 \usage{
-word_document(toc = TRUE, theme = "teal")
+word_document(toc = TRUE, theme = "plain")
 }
 \arguments{
 \item{toc}{Include a table of contents (2 levels deep)?}

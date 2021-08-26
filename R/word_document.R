@@ -4,7 +4,7 @@
 #' @param theme Theme to use in styling the output document
 #'
 #' @export
-word_document <- function(toc = TRUE, theme = "teal") {
+word_document <- function(toc = TRUE, theme = "plain") {
 
 	# fetch the stylesheet
 	refdoc = bscContentHelpers::find_theme_doc(theme, "docx")
