@@ -7,18 +7,21 @@
 #' @export
 #'
 #' @examples find_theme_doc("red", extension = "pptx")
-find_theme_doc <- function(theme, extension = c("docx", "pptx")) {
+find_theme_doc <- function(theme, extension) {
 
-	# find style reference doc
-	themedoc = bscContentHelpers::pkg_resource(
-		paste0("rmd_files/", theme, ".", extension)
-	)
+	# set default to NULL
+	themedoc = NULL
 
-	# if reference doc wasn't found, return `NULL`
-	if (themedoc == "") {
-		themedoc = NULL
+	# look for style reference doc; plain is backup
+	for (t in c(theme, "plain")) {
+		themedoc = bscContentHelpers::pkg_resource(
+			paste0("rmd_files/", t, ".", extension)
+		)
+
+		# if a match is found, stop looking
+		if (!is.null(themedoc)) {break}
 	}
 
-	# return value
+	# return file reference
 	themedoc
 }

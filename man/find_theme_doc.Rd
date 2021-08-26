@@ -4,7 +4,7 @@
 \alias{find_theme_doc}
 \title{Fetch the reference doc associated with a theme}
 \usage{
-find_theme_doc(theme, extension = c("docx", "pptx"))
+find_theme_doc(theme, extension)
 }
 \arguments{
 \item{theme}{The name of the theme. Must match the name of the reference file.}

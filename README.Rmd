@@ -119,6 +119,35 @@ All arguments passed to the knit function have defaults, but some can be updated
 * `file_date: Sys.Date()`. Date to be appended to the end of the file name, if applciable. Defaults to today's date but can be explicitly overridden. To avoid errors, pass as a date object.
 
 
+## Create a New Reference Doc
+
+You might want to do this to set up a new set of styles but leave an output format otherwise the same. The reference doc might be a reference.docx, a reference.ppt, or a reference.css.
+
+### Docx
+
+It's best to start from a fresh pandoc template. In the terminal (not the R console):
+
+```
+$ pandoc -o custom-reference.docx --print-default-data-file reference.docx
+```
+
+Open the new file (`custom-reference.docx`). Built-in styles are listed in the ribbon. To edit a style, right-click its name and select `Modify...`. Change font or paragraph options or add header images. Later documents based on this reference document will have the updated styles applied.
+
+![.docx styles](man/figures/docx_styles.png)
+![.docx styles](man/figures/modify_docx_styles.png)
+
+Save the reference document in this package's `inst/rmd_files/` directory with a descriptive name. Check and reinstall the package. The name will become a theme name that can be referenced in the yaml header (e.g., reference `teal.docx` with the yaml option `theme: "teal"`).
+
+Note that just changing the formatting of the text in the document, without editing the underlying style, will not extend to documents based on this template.
+
+### .pptx
+
+*TODO: Edit the slide masters.*
+
+### .css
+
+*TODO: Add a css stylesheet.*
+
 
 ## Create a New Template
 
@@ -134,7 +163,7 @@ To edit the .Rmd template file (which will be the basis of any documents based o
 
 The header block, surrounded by three ticks (`---`), includes parameters that will be used when rendering the document to its final form. Some, like title and date, are placeholders and may be edited every time a new document is created. Others, like the output format and knit function, can be standardized in this document so they will be the same every time a document of this type is created. For more about formats and knit functions, see below.
 
-## Create a New Format
+## Create a New Output Format
 
 An Rmd template defines the content and structure of a document. Once the content has been developed, one or more formats can be applied. Formats define the type of file (e.g., .docx or .pptx) and the look and feel (e.g., colors, fonts, headers) of the final product. 
 

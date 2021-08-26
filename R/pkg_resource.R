@@ -7,5 +7,12 @@
 #'
 #' @examples pkg_resource("rmd_files/custom.css")
 pkg_resource <- function(...) {
-	system.file(..., package = "bscContentHelpers")
+	# look for a match
+	f = system.file(..., package = "bscContentHelpers")
+
+	# if nothing is found, return NULL
+	if (f == "") {f = NULL}
+
+	# return
+	f
 }
