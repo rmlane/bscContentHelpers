@@ -4,10 +4,12 @@
 \alias{pkg_resource}
 \title{Fetch a Resource from the Current Package}
 \usage{
-pkg_resource(...)
+pkg_resource(..., package = "bscContentHelpers")
 }
 \arguments{
 \item{...}{The search string for the desired resource}
+
+\item{package}{The name of the package}
 }
 \value{
 The path to the resource
