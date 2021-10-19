@@ -98,6 +98,7 @@ Document types defined in this package:
 * `word_document`
   * `theme`
   * `toc`
+* `pdf_document`. Based on `bookdown::pdf_document2()`.
 
 Note that you can also use output formats defined outside this package if you prefer. `rmarkdown` has many nice formats built in, and there are dozens of other packages out there.
 
