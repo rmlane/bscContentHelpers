@@ -26,7 +26,6 @@ Review the package documentation for more about configuring the output. In brief
 
 * `bscContentHelpers::html_draft`
 * `bscContentHelpers::word_document`
-* `bscContentHelpers::pdf_document`
 * `bscContentHelpers::pptx_document`
 
 This template is oriented toward html, Word, or PDF output, but you can choose anything you want. Include multiple formats to knit them all at once. Delete or comment out the ones you don't need.
