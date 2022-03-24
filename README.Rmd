@@ -202,46 +202,46 @@ Supporting files should be put in `inst/rmd_files/`. See examples in `R/` (`html
 
 *TODO*
 
-## Google Drive Integration
+<!-- ## Google Drive Integration -->
 
-*TODO: Think through and expand on this section and process.*
+<!-- *TODO: Think through and expand on this section and process.* -->
 
-Templates and documents are stored in a [BSC Content folder on Google Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP). They can be accessed through RStudio via the [`googledrive` package](https://googledrive.tidyverse.org/). 
+<!-- Templates and documents are stored in a [BSC Content folder on Google Drive](https://drive.google.com/drive/folders/16XepzMyzRAK4pcuET8goearkb0J5GwLP). They can be accessed through RStudio via the [`googledrive` package](https://googledrive.tidyverse.org/).  -->
 
-Reading and writing files requires allowing the R package to access your Google Drive account. To ensure you have access, run:
+<!-- Reading and writing files requires allowing the R package to access your Google Drive account. To ensure you have access, run: -->
 
-```{r, eval = FALSE}
-# if necessary, install the package
-install.packages("googledrive")
+<!-- ```{r, eval = FALSE} -->
+<!-- # if necessary, install the package -->
+<!-- install.packages("googledrive") -->
 
-# view files and folders in the BSC Content Google Drive folder
-googledrive::drive_ls(as_id(gd_id), recursive = FALSE)
-```
+<!-- # view files and folders in the BSC Content Google Drive folder -->
+<!-- googledrive::drive_ls(as_id(gd_id), recursive = FALSE) -->
+<!-- ``` -->
 
-You should be sent to a login screen. Authorize Tidyverse API to access your Google account.
+<!-- You should be sent to a login screen. Authorize Tidyverse API to access your Google account. -->
 
-Files can be saved to and read from specific Google Drive locations. Every Google Drive folder has a unique id, equivalent to the id used in the URL in a web browser.
+<!-- Files can be saved to and read from specific Google Drive locations. Every Google Drive folder has a unique id, equivalent to the id used in the URL in a web browser. -->
 
-![Google Drive folder id](man/figures/gd_id.png)
-To look up the id of a subfolder (nested within BSC Content), use `find_gd_id()`
+<!-- ![Google Drive folder id](man/figures/gd_id.png) -->
+<!-- To look up the id of a subfolder (nested within BSC Content), use `find_gd_id()` -->
 
-```{r}
-find_gd_id("Templates")
-```
+<!-- ```{r} -->
+<!-- find_gd_id("Templates") -->
+<!-- ``` -->
 
-Any time an .Rmd template is updated in this package, generate a fresh copy and send it to the `BSC Content/Templates` folder. This will overwrite the existing copy on Google Drive.
+<!-- Any time an .Rmd template is updated in this package, generate a fresh copy and send it to the `BSC Content/Templates` folder. This will overwrite the existing copy on Google Drive. -->
 
-```{r}
-upload_template_to_drive("article")
-```
+<!-- ```{r} -->
+<!-- upload_template_to_drive("article") -->
+<!-- ``` -->
 
 
-TODO
+<!-- TODO -->
 
-- [ ] When, where, and how should files should be uploaded to Drive?
-- [ ] Set target (dynamic) locations for outputs
-- [ ] Wite a `knit_template` function that will regenerate Rmd templates in Drive
-- [ ] ~~Workflows and functions to convert from one template to another~~
-- [ ] connect document titles to file names (and calls to `rmarkdown::draft()`)
-- [x] where to set output doc parameters for use in knit fxn?
+<!-- - [ ] When, where, and how should files should be uploaded to Drive? -->
+<!-- - [ ] Set target (dynamic) locations for outputs -->
+<!-- - [ ] Wite a `knit_template` function that will regenerate Rmd templates in Drive -->
+<!-- - [ ] ~~Workflows and functions to convert from one template to another~~ -->
+<!-- - [ ] connect document titles to file names (and calls to `rmarkdown::draft()`) -->
+<!-- - [x] where to set output doc parameters for use in knit fxn? -->
 
